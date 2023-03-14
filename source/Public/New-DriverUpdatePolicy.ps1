@@ -13,7 +13,7 @@ function New-DriverUpdatePolicy {
     .PARAMETER deferralTime
         The deferral time for the policy. This is only required for Automatic policies.
     #>
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess=$true)]
     param (
         # The Deployment Audience ID
         [Parameter(Mandatory = $true)]
@@ -79,7 +79,7 @@ function New-DriverUpdatePolicy {
         }
     }
     end {
-        if ($pscmdlet.ShouldProcess(
+        if ($PSCmdlet.ShouldProcess(
                 'Creating a WUfBDS Driver Update Policy',
                 'Warning: Creating a WUfBDS Driver Update Policy',
                 'Question: Are you sure you want to do continue?')) {
