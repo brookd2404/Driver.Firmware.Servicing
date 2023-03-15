@@ -12,13 +12,13 @@
 RootModule = 'Driver.Firmware.Servicing.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.8.1'
+ModuleVersion = '0.8.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
 
 # ID used to uniquely identify this module
-GUID = '5d51ec21-649b-42e1-9cea-f75628d31c7d'
+GUID = 'd64f1b2b-06ee-42a9-8e4f-558eb8cb4a35'
 
 # Author of this module
 Author = 'David Brook'
