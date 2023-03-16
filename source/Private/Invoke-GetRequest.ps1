@@ -31,7 +31,6 @@ function Invoke-GetRequest {
                     Method = "GET"
                     URI    = $Uri
                 }
-
                 $getRequest = Invoke-MgGraphRequest @getRequestParameters -ErrorAction Stop
                 $requestArray = @()
                 $requestArray += IF ($getRequest.value) { $getRequest.value }else { $getRequest }
@@ -43,7 +42,6 @@ function Invoke-GetRequest {
                     $getRequest = Invoke-MgGraphRequest @getRequest_NextLink -ErrorAction Stop
                     $requestArray += IF ($getRequest.value) { $getRequest.value }else { $getRequest }
                 }
-
                 $return = $requestArray
             }
             false {

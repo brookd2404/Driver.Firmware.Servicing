@@ -11,7 +11,7 @@ function Push-EnrollUpdateableAsset {
     .PARAMETER azureDeviceIDs
         The Azure AD Device IDs to enroll as updateable assets.
     #>
-    [CmdletBinding(ShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param (
         [Parameter(Mandatory = $true)]
         [array]
@@ -26,7 +26,19 @@ function Push-EnrollUpdateableAsset {
         }
     }
     process {
-        $updatableAssets = Get-UpdatableAssets
+        if($PSCmdlet.ShouldProcess("Enroll Assets", "Enroll Assets")) {
+            $updateAudienceMembers = Get-DriverUpdatePolicyAudienceMember -policyID $updateAudienceID
+            foreach ($id in $azureDeviceIDs) {
+                IF (-Not($updateAudienceMembers.id -contains $id)) {
+                    $memberObject = @{
+                        "@odata.type" = "#microsoft.graph.windowsUpdates.azureADDevice"
+                        id            = $id
+                    }
+                    $paramBody.addMembers += $memberObject
+                }
+            }
+        }
+        $updatableAssets = Get-UpdatableAsset
         foreach ($id in $azureDeviceIDs) {
             IF (-Not($updatableAssets | Where-Object { $_.id -match $id }).enrollments.updateCategory -notcontains "driver") {
                 $memberObject = @{

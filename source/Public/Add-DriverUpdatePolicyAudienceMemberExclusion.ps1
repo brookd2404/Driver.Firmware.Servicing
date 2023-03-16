@@ -20,6 +20,7 @@ function Add-DriverUpdatePolicyAudienceMember {
         [Parameter(Mandatory = $true)]
         [string]
         $updateAudienceID
+
     )
     begin {
         # Create the param body base

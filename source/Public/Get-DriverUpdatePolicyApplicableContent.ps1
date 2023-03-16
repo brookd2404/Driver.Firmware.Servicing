@@ -19,7 +19,7 @@ function Get-DriverUpdatePolicyApplicableContent {
     )
     process {
         try {
-            $policy = Invoke-GetRequest -Uri "https://graph.microsoft.com/beta/admin/windows/updates/updatePolicies/$policyID" -All
+            $policy = Get-DriverUpdatePolicy -policyID $policyID
             $applicableConent = Invoke-GetRequest -Uri "https://graph.microsoft.com/beta/admin/windows/updates/deploymentAudiences('$($policy.audience.id)')/applicableContent?`$expand=catalogEntry" -All
         }
         catch {

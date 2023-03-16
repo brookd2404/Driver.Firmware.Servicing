@@ -32,7 +32,7 @@ function Update-DriverUpdatePatchDeferral {
             complianceChangeRules = @()
         }
         # Create the param body base
-        $complianceChangeRules = (Invoke-MgGraphRequest -Uri "https://graph.microsoft.com/beta/admin/windows/updates/updatePolicies/$policyID" -Method GET).complianceChangeRules
+        $complianceChangeRules = (Get-DriverUpdatePolicy -policyID $policyID).complianceChangeRules
     }
     process {
         $paramBody.complianceChangeRules += $complianceChangeRules

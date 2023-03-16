@@ -8,10 +8,10 @@ function Remove-DriverUpdatePolicyAudienceMember {
         Remove-DriverUpdatePolicyAudienceMember -azureDeviceIDs ("ID1","ID2") -updateAudienceID <AudienceID>
     .PARAMETER azureDeviceIDs
         The Azure Device IDs to add to the audience.
-    .PARAMETER updateAudienceID
-        The Update Audience ID to remove the members from.
+    .PARAMETER policyID
+        The Update Policy ID to get the audience from.
     #>
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param (
         [Parameter(Mandatory = $true)]
         [array]
@@ -19,7 +19,7 @@ function Remove-DriverUpdatePolicyAudienceMember {
         # The Update Audience ID
         [Parameter(Mandatory = $true)]
         [string]
-        $updateAudienceID
+        $policyID
 
     )
     begin {
@@ -30,7 +30,14 @@ function Remove-DriverUpdatePolicyAudienceMember {
         }
     }
     process {
-        $updateAudienceMembers = Get-DriverUpdatePolicyAudienceMember -policyID $updateAudienceID
+        if ($PSCmdlet.ShouldProcess("Remove members from the deployment audience")) {
+            Write-Verbose "Removing members from the deployment audience"
+        }
+        else {
+            return
+        }
+        $updateAudienceID = (Get-DriverUpdatePolicy -policyID $policyID).audience.id
+        $updateAudienceMembers = Get-DriverUpdatePolicyAudienceMember -policyID $policyID
         foreach ($id in $azureDeviceIDs) {
             IF ($updateAudienceMembers.id -contains $id) {
                 $memberObject = @{
@@ -44,7 +51,7 @@ function Remove-DriverUpdatePolicyAudienceMember {
     end {
         IF ($paramBody.removeMembers.Count -ge 1) {
             Invoke-MgGraphRequest `
-                -Method POST `
+                -Method Post `
                 -Uri "https://graph.microsoft.com/beta/admin/windows/updates/deploymentAudiences('$updateAudienceID')/updateAudience" `
                 -Body $paramBody
         }
