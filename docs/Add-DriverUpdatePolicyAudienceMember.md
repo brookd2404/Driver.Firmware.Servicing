@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Add-DriverUpdatePolicyAudienceMember
+# Add-DeploymentAudienceMember
 
 ## SYNOPSIS
 Add members to a deployment audience for Windows Updates for Business
@@ -13,7 +13,7 @@ Add members to a deployment audience for Windows Updates for Business
 ## SYNTAX
 
 ```
-Add-DriverUpdatePolicyAudienceMember [-azureDeviceIDs] <Array> [-updateAudienceID] <String>
+Add-DeploymentAudienceMember [-azureDeviceIDs] <Array> [-updateAudienceID] <String>
  [<CommonParameters>]
 ```
 

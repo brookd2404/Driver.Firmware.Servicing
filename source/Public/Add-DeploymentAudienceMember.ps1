@@ -1,11 +1,11 @@
-function Add-DriverUpdatePolicyAudienceMember {
+function Add-DeploymentAudienceMember {
     <#
     .SYNOPSIS
         Add members to a deployment audience for Windows Updates for Business
     .DESCRIPTION
         This function will check if the deployments audiences have the devices as members, and if not they will be added to the audience.
     .EXAMPLE
-        Add-DriverUpdatePolicyAudienceMember -azureDeviceIDs ("ID1","ID2") -updateAudienceID <AudienceID>
+        Add-DeploymentAudienceMember -azureDeviceIDs ("ID1","ID2") -updateAudienceID <AudienceID>
     .PARAMETER azureDeviceIDs
         The Azure Device IDs to add to the audience.
     .PARAMETER updateAudienceID
@@ -20,7 +20,6 @@ function Add-DriverUpdatePolicyAudienceMember {
         [Parameter(Mandatory = $true)]
         [string]
         $updateAudienceID
-
     )
     begin {
         # Create the param body base
@@ -30,7 +29,7 @@ function Add-DriverUpdatePolicyAudienceMember {
         }
     }
     process {
-        $updateAudienceMembers = Get-DriverUpdatePolicyAudienceMember -policyID $updateAudienceID
+        $updateAudienceMembers = Get-DeploymentAudienceMember -policyID $updateAudienceID
         foreach ($id in $azureDeviceIDs) {
             IF (-Not($updateAudienceMembers.id -contains $id)) {
                 $memberObject = @{

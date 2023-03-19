@@ -1,4 +1,4 @@
-function Get-DriverUpdatePolicyAudienceMember {
+function Get-DeploymentAudienceMember {
     <#
 .SYNOPSIS
     This function will get the members of a deployment audience for Windows Updates for Business.
@@ -7,7 +7,7 @@ function Get-DriverUpdatePolicyAudienceMember {
 .NOTES
     This has only been tested for the commercial driver and firmware updates.
 .EXAMPLE
-    Get-DriverUpdatePolicyAudienceMember -policyID <PolicyID>
+    Get-DeploymentAudienceMember -policyID <PolicyID>
 .PARAMETER policyID
     The policy ID to get the members for.
 #>

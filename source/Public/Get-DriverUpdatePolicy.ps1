@@ -20,10 +20,10 @@ function Get-DriverUpdatePolicy{
     )
     process {
         try {
-            IF($policyID){
-                $policy = Invoke-GetRequest -Uri "https://graph.microsoft.com/beta/admin/windows/updates/updatePolicies?`$filter=id eq '$policyID'"
-            } elseif (-Not([string]::IsNullOrEmpty($AzureADDeviceID))) {
+            if([string]::IsNullOrEmpty($policyID)){
                 $policy = Invoke-GetRequest -Uri "https://graph.microsoft.com/beta/admin/windows/updates/updatePolicies" -All
+            } else {
+                $policy = Invoke-GetRequest -Uri "https://graph.microsoft.com/beta/admin/windows/updates/updatePolicies?`$filter=id eq '$policyID'"
             }
         }
         catch {

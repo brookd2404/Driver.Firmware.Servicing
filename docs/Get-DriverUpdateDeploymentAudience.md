@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-DriverUpdateDeploymentAudience
+# Get-DeploymentAudience
 
 ## SYNOPSIS
 This function get Update Deployment Audiences.
@@ -13,7 +13,7 @@ This function get Update Deployment Audiences.
 ## SYNTAX
 
 ```
-Get-DriverUpdateDeploymentAudience [[-audienceID] <String>] [<CommonParameters>]
+Get-DeploymentAudience [[-audienceID] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +23,10 @@ This function get Update Deployment Audiences.
 
 ### EXAMPLE 1
 ```
-Get-DriverUpdateDeploymentAudience
+Get-DeploymentAudience
 ```
 
-Get-DriverUpdateDeploymentAudience -audienceID \<audienceID\>
+Get-DeploymentAudience -audienceID \<audienceID\>
 
 ## PARAMETERS
 

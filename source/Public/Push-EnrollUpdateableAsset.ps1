@@ -27,7 +27,7 @@ function Push-EnrollUpdateableAsset {
     }
     process {
         if($PSCmdlet.ShouldProcess("Enroll Assets", "Enroll Assets")) {
-            $updateAudienceMembers = Get-DriverUpdatePolicyAudienceMember -policyID $updateAudienceID
+            $updateAudienceMembers = Get-DeploymentAudienceMember -policyID $updateAudienceID
             foreach ($id in $azureDeviceIDs) {
                 IF (-Not($updateAudienceMembers.id -contains $id)) {
                     $memberObject = @{

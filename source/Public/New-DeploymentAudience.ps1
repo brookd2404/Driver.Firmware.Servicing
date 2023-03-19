@@ -1,11 +1,11 @@
-function New-DriverUpdateDeploymentAudience {
+function New-DeploymentAudience {
     <#
     .SYNOPSIS
         Creates a WUfBDS Deployment Audience
     .DESCRIPTION
         Creates a WUfBDS Deployment Audience for Policy Assignment.
     .EXAMPLE
-        New-DriverUpdateDeploymentAudience
+        New-DeploymentAudience
     .PARAMETER daAudienceParams
         The parameters to create the deployment audience.
     #>

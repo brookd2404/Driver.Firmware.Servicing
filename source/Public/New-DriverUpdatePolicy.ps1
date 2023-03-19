@@ -5,9 +5,9 @@ function New-DriverUpdatePolicy {
     .DESCRIPTION
         Based on the inputs, will depend on the policy creation type of Manual or Automatic.
     .EXAMPLE
-        New-DriverUpdatePolicy -deploymentAudienceID $daAudience.id -policyType Automatic -deferralTime PT1D
-    .PARAMETER deploymentAudienceID
-        The Deployment Audience ID. This can be obtained from the Get-DriverUpdateDeploymentAudience function.
+        New-DriverUpdatePolicy -audienceID $daAudience.id -policyType Automatic -deferralTime PT1D
+    .PARAMETER audienceID
+        The Deployment Audience ID. This can be obtained from the Get-DeploymentAudience function.
     .PARAMETER policyType
         The type of policy to create. Manual or Automatic.
     .PARAMETER deferralTime
@@ -18,7 +18,7 @@ function New-DriverUpdatePolicy {
         # The Deployment Audience ID
         [Parameter(Mandatory = $true)]
         [string]
-        $deploymentAudienceID,
+        $audienceID,
         # Manual or Automatic Publishing Policy
         [Parameter(Mandatory = $true)]
         [ValidateSet("Manual", "Automatic")]
@@ -34,7 +34,7 @@ function New-DriverUpdatePolicy {
         $paramBody = @{
             "@odata.type"                  = "#microsoft.graph.windowsUpdates.updatePolicy"
             audience                       = @{
-                id = $deploymentAudienceID
+                id = $audienceID
             }
             autoEnrollmentUpdateCategories = @(
                 "driver"

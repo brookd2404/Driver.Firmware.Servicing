@@ -3,7 +3,7 @@ function Get-DriverUpdatePolicyComplianceChange {
 .SYNOPSIS
     This function will get the compliance changes for an update policy for Windows Updates for Business.
 .DESCRIPTION
-    This function will get the compliance changes for an update policy for Windows Updates for Business.
+    This function will get the compliance changes for an update policy for Windows Updates for Business. This include the deployment schedule for the Driver Updates if Deferrals are configured.
 .NOTES
     This has only been tested for the commercial driver and firmware updates.
 .EXAMPLE

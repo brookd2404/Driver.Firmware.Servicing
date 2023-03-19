@@ -1,4 +1,4 @@
-function Get-DriverUpdateDeploymentAudience {
+function Get-DeploymentAudience {
     <#
     .SYNOPSIS
         This function get Update Deployment Audiences.
@@ -7,8 +7,8 @@ function Get-DriverUpdateDeploymentAudience {
     .NOTES
         This has only been tested for the commercial driver and firmware updates.
     .EXAMPLE
-        Get-DriverUpdateDeploymentAudience
-        Get-DriverUpdateDeploymentAudience -audienceID <audienceID>
+        Get-DeploymentAudience
+        Get-DeploymentAudience -audienceID <audienceID>
     .PARAMETER audienceID
         The audience ID to get the deployment audience for.
     #>

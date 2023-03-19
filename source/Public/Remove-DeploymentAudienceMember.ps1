@@ -1,11 +1,11 @@
-function Remove-DriverUpdatePolicyAudienceMember {
+function Remove-DeploymentAudienceMember {
     <#
     .SYNOPSIS
         Remove members from a deployment audience for Windows Updates for Business
     .DESCRIPTION
         This function will check if the deployments audiences have the devices as members, and if so they will be removed from the audience.
     .EXAMPLE
-        Remove-DriverUpdatePolicyAudienceMember -azureDeviceIDs ("ID1","ID2") -updateAudienceID <AudienceID>
+        Remove-DeploymentAudienceMember -azureDeviceIDs ("ID1","ID2") -updateAudienceID <AudienceID>
     .PARAMETER azureDeviceIDs
         The Azure Device IDs to add to the audience.
     .PARAMETER policyID
@@ -37,7 +37,7 @@ function Remove-DriverUpdatePolicyAudienceMember {
             return
         }
         $updateAudienceID = (Get-DriverUpdatePolicy -policyID $policyID).audience.id
-        $updateAudienceMembers = Get-DriverUpdatePolicyAudienceMember -policyID $policyID
+        $updateAudienceMembers = Get-DeploymentAudienceMember -policyID $policyID
         foreach ($id in $azureDeviceIDs) {
             IF ($updateAudienceMembers.id -contains $id) {
                 $memberObject = @{

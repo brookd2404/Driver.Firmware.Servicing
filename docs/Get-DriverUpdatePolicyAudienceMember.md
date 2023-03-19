@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-DriverUpdatePolicyAudienceMember
+# Get-DeploymentAudienceMember
 
 ## SYNOPSIS
 This function will get the members of a deployment audience for Windows Updates for Business.
@@ -13,7 +13,7 @@ This function will get the members of a deployment audience for Windows Updates 
 ## SYNTAX
 
 ```
-Get-DriverUpdatePolicyAudienceMember [-policyID] <String> [<CommonParameters>]
+Get-DeploymentAudienceMember [-policyID] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION

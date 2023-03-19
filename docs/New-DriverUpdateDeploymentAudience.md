@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# New-DriverUpdateDeploymentAudience
+# New-DeploymentAudience
 
 ## SYNOPSIS
 Creates a WUfBDS Deployment Audience
@@ -13,7 +13,7 @@ Creates a WUfBDS Deployment Audience
 ## SYNTAX
 
 ```
-New-DriverUpdateDeploymentAudience [[-daAudienceParams] <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-DeploymentAudience [[-daAudienceParams] <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,7 +23,7 @@ Creates a WUfBDS Deployment Audience for Policy Assignment.
 
 ### EXAMPLE 1
 ```
-New-DriverUpdateDeploymentAudience
+New-DeploymentAudience
 ```
 
 ## PARAMETERS

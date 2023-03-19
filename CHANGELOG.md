@@ -5,6 +5,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Added
+
+- Remove-DriverUpdatePolicy: This will allow you to remove a Driver Update Policy
+- Remove-DeploymentAudience: This will allow you to remove a Deployment Audience
+- Add-DriverUpdateApproval: This will allow you to add a Driver Update Approval
+
+## Changed
+- New-DriverUpdatePolicy: Changed input param from deploymentAudienceId to audienceID
+- The names of a couple of the modules to be more descriptive
+
+### Removed
+- Removed an unneeded function
+
+## [0.9.1] - 2023-03-16
+
 ### Added
 - Get-DriverUpdatePolicyComplianceChanges : This will allow you to see the compliance change settings such as the schedule for updates.
 ### Fixed 

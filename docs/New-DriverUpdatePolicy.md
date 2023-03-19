@@ -31,7 +31,7 @@ New-DriverUpdatePolicy -deploymentAudienceID $daAudience.id -policyType Automati
 
 ### -deploymentAudienceID
 The Deployment Audience ID.
-This can be obtained from the Get-DriverUpdateDeploymentAudience function.
+This can be obtained from the Get-DeploymentAudience function.
 
 ```yaml
 Type: String
