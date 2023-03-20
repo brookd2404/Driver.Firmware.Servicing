@@ -5,33 +5,31 @@ online version:
 schema: 2.0.0
 ---
 
-# New-DriverUpdatePolicy
+# Remove-DeploymentAudience
 
 ## SYNOPSIS
-This function is to be used to create a Driver Policy for WUfBDS
+Deletes a Deployment Audience for Windows Updates for Business.
 
 ## SYNTAX
 
 ```
-New-DriverUpdatePolicy [-audienceID] <String> [-policyType] <String> [[-deferralTime] <String>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+Remove-DeploymentAudience [-audienceID] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Based on the inputs, will depend on the policy creation type of Manual or Automatic.
+This function will delete a Deployment Audience for Windows Updates for Business.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-New-DriverUpdatePolicy -audienceID $daAudience.id -policyType Automatic -deferralTime PT1D
+Remove-DeploymentAudience -audienceID 00000000-0000-0000-0000-000000000000
 ```
 
 ## PARAMETERS
 
 ### -audienceID
-The Deployment Audience ID.
-This can be obtained from the Get-DeploymentAudience function.
+The Update Policy ID to delete.
 
 ```yaml
 Type: String
@@ -41,38 +39,6 @@ Aliases:
 Required: True
 Position: 1
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -policyType
-The type of policy to create.
-Manual or Automatic.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -deferralTime
-The deferral time for the policy.
-This is only required for Automatic policies.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: PT0S
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -115,6 +81,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.String
 ## NOTES
 
 ## RELATED LINKS

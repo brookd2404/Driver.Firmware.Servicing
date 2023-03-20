@@ -11,8 +11,11 @@ function Add-DriverUpdateApproval {
         The policy IDs to add the approval to.
     .PARAMETER catalogEntryID
         The catalog entry ID to add to the policy.
+    .PARAMETER deferDays
+        The days to defer the deployment of the driver update.
     #>
     [CmdletBinding()]
+    [OutputType([System.Object])]
     param (
         [Parameter(Mandatory = $true)]
         [array]
@@ -20,7 +23,11 @@ function Add-DriverUpdateApproval {
         # The catalog entry ID, use Get-DriverUpdatePolicyApplicableContent to get the ID.
         [Parameter(Mandatory = $true)]
         [string]
-        $catalogEntryID
+        $catalogEntryID,
+        # The days to defer the deployment of the driver update.
+        [Parameter()]
+        [int]
+        $deferDays = 0
     )
     begin {
         # Create the param body base
@@ -31,14 +38,14 @@ function Add-DriverUpdateApproval {
                 catalogEntry = @{
                     "@odata.type" = "#microsoft.graph.windowsUpdates.driverUpdateCatalogEntry"
                     id = $catalogEntryID
-                }  
+                }
             }
             deploymentSettings = @{
                 "@odata.type" = "microsoft.graph.windowsUpdates.deploymentSettings"
                 schedule = @{
                     startDateTime = ""
                 }
-            }  
+            }
         }
     }
     process {
@@ -46,7 +53,7 @@ function Add-DriverUpdateApproval {
         foreach ($policyID in $policyIDs) {
             $applicableConent = Get-DriverUpdatePolicyApplicableContent -policyID $policyID
             if ($applicableConent.catalogEntry.id -contains $catalogEntryID) {
-                $startDate = (Get-Date).AddDays(0).ToString("yyyy-MM-ddTHH:mm:ssZ")
+                $startDate = (Get-Date).AddDays($deferDays).ToString("yyyy-MM-ddT00:00:00Z")
                 try {
                     $paramBody.deploymentSettings.schedule.startDateTime = $startDate
                     $responce = Invoke-MgGraphRequest `
@@ -66,6 +73,6 @@ function Add-DriverUpdateApproval {
         }
     }
     end {
-        return $return
+        return ,@($return)
     }
 }

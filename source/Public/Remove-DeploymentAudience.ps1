@@ -10,6 +10,7 @@ function Remove-DeploymentAudience {
         The Update Policy ID to delete.
     #>
     [CmdletBinding(SupportsShouldProcess = $true)]
+    [OutputType([string])]
     param (
         # The Deployment Audience ID
         [Parameter(Mandatory = $true)]
@@ -17,15 +18,8 @@ function Remove-DeploymentAudience {
         $audienceID
 
     )
-    begin {
-        # Create the param body base
-        $paramBody = @{
-            removeMembers = @(
-            )
-        }
-    }
     process {
-        if ($PSCmdlet.ShouldProcess("Deletes the Update Audience with ID $audienceID", 
+        if ($PSCmdlet.ShouldProcess("Deletes the Update Audience with ID $audienceID",
             "Delete Update Audience",
             "Do you want to delete the Update Audience with ID $audienceID?"
             )

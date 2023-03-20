@@ -5,38 +5,34 @@ online version:
 schema: 2.0.0
 ---
 
-# Invoke-GetRequest
+# Add-DeploymentAudienceMember
 
 ## SYNOPSIS
-Performs Get Requests with Pagination.
+Add members to a deployment audience for Windows Updates for Business
 
 ## SYNTAX
 
 ```
-Invoke-GetRequest [-Uri] <String> [-All] [<CommonParameters>]
+Add-DeploymentAudienceMember [-azureDeviceIDs] <Array> [-updateAudienceID] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Performs Get Requests with Pagination.
-Without the logic in this function, all results would not be returned.
+This function will check if the deployments audiences have the devices as members, and if not they will be added to the audience.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Invoke-GetRequest -Uri "https://graph.microsoft.com/beta/me"
-```
 
-Invoke-GetRequest -Uri "https://graph.microsoft.com/beta/me" -All
+```
 
 ## PARAMETERS
 
-### -Uri
-The URI to perform the Get Request on.
-This is a mandatory parameter.
+### -azureDeviceIDs
+The Azure Device IDs to add to the audience.
 
 ```yaml
-Type: String
+Type: Array
 Parameter Sets: (All)
 Aliases:
 
@@ -47,18 +43,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -All
-This switch will determine if paginated requests will be run.
-This is an optional parameter.
+### -updateAudienceID
+The Update Audience ID to add the members to.
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: Named
-Default value: False
+Required: True
+Position: 2
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -71,6 +66,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Tested on PowerShell 5 and 7 on Windows.
 
 ## RELATED LINKS

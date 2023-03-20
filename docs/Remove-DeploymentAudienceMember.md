@@ -5,36 +5,35 @@ online version:
 schema: 2.0.0
 ---
 
-# New-DriverUpdatePolicy
+# Remove-DeploymentAudienceMember
 
 ## SYNOPSIS
-This function is to be used to create a Driver Policy for WUfBDS
+Remove members from a deployment audience for Windows Updates for Business
 
 ## SYNTAX
 
 ```
-New-DriverUpdatePolicy [-audienceID] <String> [-policyType] <String> [[-deferralTime] <String>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+Remove-DeploymentAudienceMember [-azureDeviceIDs] <Array> [-policyID] <String> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Based on the inputs, will depend on the policy creation type of Manual or Automatic.
+This function will check if the deployments audiences have the devices as members, and if so they will be removed from the audience.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-New-DriverUpdatePolicy -audienceID $daAudience.id -policyType Automatic -deferralTime PT1D
+
 ```
 
 ## PARAMETERS
 
-### -audienceID
-The Deployment Audience ID.
-This can be obtained from the Get-DeploymentAudience function.
+### -azureDeviceIDs
+The Azure Device IDs to add to the audience.
 
 ```yaml
-Type: String
+Type: Array
 Parameter Sets: (All)
 Aliases:
 
@@ -45,9 +44,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -policyType
-The type of policy to create.
-Manual or Automatic.
+### -policyID
+The Update Policy ID to get the audience from.
 
 ```yaml
 Type: String
@@ -57,22 +55,6 @@ Aliases:
 Required: True
 Position: 2
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -deferralTime
-The deferral time for the policy.
-This is only required for Automatic policies.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: PT0S
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

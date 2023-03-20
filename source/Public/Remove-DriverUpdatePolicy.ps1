@@ -10,6 +10,7 @@ function Remove-DriverUpdatePolicy {
         The Update Policy ID to delete.
     #>
     [CmdletBinding(SupportsShouldProcess = $true)]
+    [OutputType([string])]
     param (
         # The Update Audience ID
         [Parameter(Mandatory = $true)]
@@ -17,15 +18,8 @@ function Remove-DriverUpdatePolicy {
         $policyID
 
     )
-    begin {
-        # Create the param body base
-        $paramBody = @{
-            removeMembers = @(
-            )
-        }
-    }
     process {
-        if ($PSCmdlet.ShouldProcess("Deletes the Driver Update Policy with ID $policyID", 
+        if ($PSCmdlet.ShouldProcess("Deletes the Driver Update Policy with ID $policyID",
             "Delete Driver Update Policy",
             "Do you want to delete the Driver Update Policy with ID $policyID?"
             )

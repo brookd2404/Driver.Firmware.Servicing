@@ -5,34 +5,35 @@ online version:
 schema: 2.0.0
 ---
 
-# Push-EnrollUpdateableAsset
+# Get-DriverUpdatePolicyComplianceChange
 
 ## SYNOPSIS
-This script is to be used to push enrol assets as without it, the delay could be significant.
+This function will get the compliance changes for an update policy for Windows Updates for Business.
 
 ## SYNTAX
 
 ```
-Push-EnrollUpdateableAsset [-azureDeviceIDs] <Array> [-WhatIf] [-Confirm] [<CommonParameters>]
+Get-DriverUpdatePolicyComplianceChange [-policyID] <String> [[-catalogentryID] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This script is to be used to push enrol assets as without it, the delay could be significant.
+This function will get the compliance changes for an update policy for Windows Updates for Business.
+This include the deployment schedule for the Driver Updates if Deferrals are configured.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Push-EnrollUpdateableAsset -azureDeviceIDs ('ID1','ID2')
+
 ```
 
 ## PARAMETERS
 
-### -azureDeviceIDs
-The Azure AD Device IDs to enroll as updateable assets.
+### -policyID
+The policy ID to get the applicable content for.
 
 ```yaml
-Type: Array
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -43,32 +44,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+### -catalogentryID
+The update catalog entry ID to get the compliance changes for.
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
-Aliases: wi
+Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
