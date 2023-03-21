@@ -47,15 +47,12 @@ BuildWorkflow:
   build:
     - Clean
     - Build_Module_ModuleBuilder
-    - Build_NestedModules_ModuleBuilder
     - Create_changelog_release_output
-
+    - Generate_MAML_from_built_module
 
   pack:
     - build
-    - package_module_nupkg
-
-
+    - zip_module_release
 
   # Defining test task to be run when invoking `./build.ps1 -Tasks test`
   test:
@@ -74,8 +71,6 @@ BuildWorkflow:
 
   publish:
     - publish_module_to_gallery
-
-    - Publish_Release_To_GitHub
 
 
 ####################################################
@@ -138,9 +133,3 @@ TaskHeader: |
   Write-Build DarkGray "  $Path"
   Write-Build DarkGray "  $($Task.InvocationInfo.ScriptName):$($Task.InvocationInfo.ScriptLineNumber)"
   ""
-
-
-
-
-
-

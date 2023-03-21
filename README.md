@@ -1,5 +1,7 @@
 # Driver.Firmware.Servicing
 
+<!-- [![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/codaamok/PSShlink/pipeline.yml?branch=main)](https://github.com/brookd2404/Driver.Firmware.Servicing/actions)  -->
+
 This repository contains the source code for the Driver.Firmware.Servicing PowerShell Module published on the [PowerShell Gallery](https://www.powershellgallery.com/packages/Driver.Firmware.Servicing/).
 
 This module was authored to aid in the management of driver and firmware updates for devices via the Microsoft Graph API. This module is intended to provide a means to manage updates for devices easier than the current methods available.

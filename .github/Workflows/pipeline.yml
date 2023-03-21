@@ -1,98 +1,108 @@
-# # This workflow has been modified from the default supplied in codaamok.build
-# name: "Pipeline"
+name: "Release Pipeline"
 
-# on: 
-#   push:
-#     paths:
-#       - 'source/**'
-#     branches:
-#       - main
-#   schedule:
-#     - cron: '30 7 * * *'
-#   workflow_dispatch:
+on:
+  push:
+    paths:
+      - "source/**"
+    branches:
+      - main
+  # schedule:
+  #   - cron: '30 7 * * *'
+  workflow_dispatch:
 
-# jobs:
-#   job-main:
-#     name: main
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v2.3.1
-#         with:
-#           fetch-depth: 0
+permissions: write-all
+jobs:
+  job-master:
+    name: master
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2.3.1
+        with:
+          fetch-depth: 0
 
-#       - name: Install GitVersion
-#         uses: gittools/actions/gitversion/setup@v0.9.10
-#         with:
-#           versionSpec: '5.x'
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.10.2
+        with:
+          versionSpec: "5.x"
 
-#       - name: Determine Version
-#         id: gitversion
-#         uses: gittools/actions/gitversion/execute@v0.9.10
-#         with:
-#           useConfigFile: true
+      - name: Determine Version
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v0.10.2
+        with:
+          useConfigFile: true
 
-#       - name: Install dependent modules, and set environment variables
-#         run: |
-#           Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
-#           Install-Module "InvokeBuild" -Force
-#           $Username, $ProjectName = $env:GITHUB_REPOSITORY -split "/"
-#           ./build.ps1 -ResolveDependency -Tasks noop
-#         shell: pwsh
+      - name: Install dependent modules, and set environment variables
+        run: |
+          Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
+          $Username, $ProjectName = $env:GITHUB_REPOSITORY -split "/"
+          ./build.ps1 -ResolveDependency -Tasks noop, SetGitHubActionEnvironmentVariables
+        shell: pwsh
 
-#       - name: Build
-#         run: |
-#           ./build.ps1
-#         shell: pwsh
+      - name: Build & Pack Module
+        run: |
+          ./build.ps1 -Tasks Pack
 
+          $Script:ManifestFile = Copy-Item -Path "output\module\Driver.Firmware.Servicing\${{ env.GitVersion_SemVer }}\Driver.Firmware.Servicing.psd1" -Destination "source\Driver.Firmware.Servicing.psd1" -force -passThru
+          $ManifestData = Import-PowerShellDataFile -Path $Script:ManifestFile
+          $ManifestData.PrivateData.PSData.ReleaseNotes >> output/releasenotes.txt
+        shell: pwsh
 
-#       # - name: Publish to PowerShell Gallery
-#       #   if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-#       #   run: Invoke-Build -File "invoke.build.ps1" -ModuleName $env:GH_PROJECTNAME -Task "PublishModule"
-#       #   shell: pwsh
-#       #   env:
-#       #     PSGALLERY_API_KEY: ${{ secrets.PSGALLERY_API_KEY }}
+      - name: Create release
+        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.GitVersion_SemVer }}
+          release_name: v${{ env.GitVersion_SemVer }}
+          body_path: output/releasenotes.txt
+          draft: false
+          prerelease: false
 
-#       - name: Create release
-#         if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-#         id: create_release
-#         uses: actions/create-release@v1
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         with:
-#           tag_name: v${{ env.GitVersion_SemVer }}
-#           release_name: v${{ env.GitVersion_SemVer }}
-#           body_path: release/releasenotes.txt
-#           draft: false
-#           prerelease: false
+      - name: Upload release asset
+        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+        id: upload_release_asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: output/${{ env.GH_PROJECTNAME }}_${{ env.GitVersion_SemVer }}.zip
+          asset_name: ${{ env.GH_PROJECTNAME }}_${{ env.GitVersion_SemVer }}.zip
+          asset_content_type: application/zip
 
-#       - name: Upload release asset
-#         if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-#         id: upload_release_asset
-#         uses: actions/upload-release-asset@v1
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         with:
-#           upload_url:  ${{ steps.create_release.outputs.upload_url }}
-#           asset_path: release/${{ env.GH_PROJECTNAME }}_${{ env.GitVersion_SemVer }}.zip
-#           asset_name: ${{ env.GH_PROJECTNAME }}_${{ env.GitVersion_SemVer }}.zip
-#           asset_content_type: application/zip
+      - name: Copy Commit Files
+        run: |
+          Copy-Item -path "./output/CHANGELOG.md" -Destination ".\" -force
+          IF(Test-Path .\docs) {
+            Remove-Item -Recurse -Path .\docs -force
+          }
+          Copy-Item -path "output/docs" -Destination ".\" -Recurse
+          GCI ./
+        shell: pwsh
 
-#       - name: Commit CHANGELOG.md and module manifest
-#         if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-#         run: |
-#           git config --global user.email "action@github.com"
-#           git config --global user.name "GitHub Action"
-#           git add CHANGELOG.md source/${GH_PROJECTNAME}.psd1 docs
-#           git commit -m "Released ${{ env.GitVersion_SemVer }}"
-      
-#       - name: Push commit
-#         if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-#         uses: ad-m/github-push-action@master
-#         with:
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit CHANGELOG.md, module manifest & docs
+        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add CHANGELOG.md
+          git add source/Driver.Firmware.Servicing.psd1
+          git add docs
+          git commit -m "Released ${{ env.GitVersion_SemVer }}"
+      #          git add CHANGELOG.md source/${GH_PROJECTNAME}.psd1 docs
 
-#       # - name: Custom post-release tasks
-#       #   if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-#       #   run: Invoke-Build -File "custom.build.ps1" -ModuleName $env:GH_PROJECTNAME -Author $env:GH_USERNAME -Version $env:GitVersion_SemVer -NewRelease $true -Task PostRelease
-#       #   shell: pwsh
+      - name: Push commit
+        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to PowerShell Gallery
+        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+        run: .\build.ps1 -task publish
+        shell: pwsh
+        env:
+          GalleryApiToken: ${{ secrets.PSGALLERY_API_KEY }}

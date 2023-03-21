@@ -303,6 +303,19 @@ process
         # Synopsis: Empty task, useful to test the bootstrap process.
         task noop { }
 
+        task SetGitHubActionEnvironmentVariables {
+            
+            "GH_PROJECTNAME=$(($env:GITHUB_REPOSITORY -split '/')[1])" >> $env:GITHUB_ENV
+        }
+
+        task zip_module_release {
+            $zipFile = Join-Path -Path $OutputDirectory -ChildPath "$($env:GH_PROJECTNAME)_$($env:GitVersion_SemVer).zip"
+
+            Write-Host -Object "Zipping release to $zipFile" -ForegroundColor DarkGray
+
+            Compress-Archive -Path "$OutputDirectory/module" -DestinationPath $zipFile -Force
+        }
+
         # Define default task sequence ("."), can be overridden in the $BuildInfo.
         task . {
             Write-Build -Object 'No sequence currently defined for the default task' -ForegroundColor Yellow

@@ -5,6 +5,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Added
+-   Release Automation
+## Fixed
+
+- Failed Build Items Failing Tests
+
 ## [1.0.0] - 2023-03-20
 
 ## Added
