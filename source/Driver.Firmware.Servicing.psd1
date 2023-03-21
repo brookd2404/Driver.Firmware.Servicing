@@ -12,7 +12,7 @@
 RootModule = 'Driver.Firmware.Servicing.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.8'
+ModuleVersion = '1.0.11'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -69,7 +69,7 @@ RequiredModules = @('Microsoft.Graph.Authentication')
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @('Add-DeploymentAudienceMember','Add-DriverUpdateApproval','Get-DeploymentAudience','Get-DeploymentAudienceMember','Get-DriverUpdatePolicy','Get-DriverUpdatePolicyApplicableContent','Get-DriverUpdatePolicyComplianceChange','Get-UpdatableAsset','New-DeploymentAudience','New-DriverUpdatePolicy','Push-EnrollUpdateableAsset','Remove-DeploymentAudience','Remove-DeploymentAudienceMember','Remove-DriverUpdatePolicy','Revoke-DriverUpdateApproval','Update-DriverUpdatePatchDeferral')
+FunctionsToExport = @('Add-DeploymentAudienceMember','Add-DriverUpdateApproval','Get-DeploymentAudience','Get-DeploymentAudienceMember','Get-DriverUpdatePolicy','Get-DriverUpdatePolicyApplicableContent','Get-DriverUpdatePolicyComplianceChange','Get-UpdatableAsset','New-DeploymentAudience','New-DriverUpdatePolicy','Push-EnrollUpdatableAsset','Remove-DeploymentAudience','Remove-DeploymentAudienceMember','Remove-DriverUpdatePolicy','Revoke-DriverUpdateApproval','Update-DriverUpdatePatchDeferral')
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = '*'
@@ -108,13 +108,13 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-          ReleaseNotes = '## [1.0.8] - 2023-03-21
+          ReleaseNotes = '## [1.0.11] - 2023-03-21
+
+## Fixed
+- Renamed Push-EnrollUpdateableAsset to Push-EnrollUpdatableAsset to resolve a spelling error
 
 ## Added
--   Release Automation
-## Fixed
-
-- Failed Build Items Failing Tests
+- Updated Automation
 
 '
 
