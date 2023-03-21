@@ -1,6 +1,11 @@
 # Driver.Firmware.Servicing
 
-<!-- [![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/codaamok/PSShlink/pipeline.yml?branch=main)](https://github.com/brookd2404/Driver.Firmware.Servicing/actions)  -->
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/brookd2404/Driver.Firmware.Servicing/pipeline.yml?branch=main)](https://github.com/brookd2404/Driver.Firmware.Servicing/actions) 
+[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/brookd2404/Driver.Firmware.Servicing/main?color=blue)](https://github.com/brookd2404/Driver.Firmware.Servicing/commits/main) 
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/brookd2404/Driver.Firmware.Servicing?color=yellow)](https://github.com/brookd2404/Driver.Firmware.Servicing/releases/latest)
+[![GitHub Release Date](https://img.shields.io/github/release-date/brookd2404/Driver.Firmware.Servicing?color=magenta)](https://github.com/brookd2404/Driver.Firmware.Servicing/releases/latest)
+[![PowerShell Gallery](https://img.shields.io/powershellgallery/dt/Driver.Firmware.Servicing?color=purple)](https://www.powershellgallery.com/packages/Driver.Firmware.Servicing)
+[![GitHub all releases](https://img.shields.io/github/downloads/brookd2404/Driver.Firmware.Servicing/total?color=orange)](https://github.com/brookd2404/Driver.Firmware.Servicing/releases)
 
 This repository contains the source code for the Driver.Firmware.Servicing PowerShell Module published on the [PowerShell Gallery](https://www.powershellgallery.com/packages/Driver.Firmware.Servicing/).
 
