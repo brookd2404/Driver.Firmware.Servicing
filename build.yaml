@@ -49,10 +49,12 @@ BuildWorkflow:
     - Build_Module_ModuleBuilder
     - Create_changelog_release_output
     - Generate_MAML_from_built_module
+    - Copy-GitReleaseNotes
 
   pack:
     - build
     - zip_module_release
+    - Copy-ModuleItems
 
   # Defining test task to be run when invoking `./build.ps1 -Tasks test`
   test:

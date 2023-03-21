@@ -35,17 +35,12 @@ jobs:
       - name: Install dependent modules, and set environment variables
         run: |
           Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
-          $Username, $ProjectName = $env:GITHUB_REPOSITORY -split "/"
           ./build.ps1 -ResolveDependency -Tasks noop, SetGitHubActionEnvironmentVariables
         shell: pwsh
 
       - name: Build & Pack Module
         run: |
           ./build.ps1 -Tasks Pack
-
-          $Script:ManifestFile = Copy-Item -Path "output\module\${{ env.GH_PROJECTNAME }}\${{ env.GitVersion_SemVer }}\${{ env.GH_PROJECTNAME }}.psd1" -Destination "source\${{ env.GH_PROJECTNAME }}.psd1" -force -passThru
-          $ManifestData = Import-PowerShellDataFile -Path $Script:ManifestFile
-          $ManifestData.PrivateData.PSData.ReleaseNotes >> output/releasenotes.txt
         shell: pwsh
 
       - name: Create release
@@ -72,16 +67,6 @@ jobs:
           asset_path: output/${{ env.GH_PROJECTNAME }}_${{ env.GitVersion_SemVer }}.zip
           asset_name: ${{ env.GH_PROJECTNAME }}_${{ env.GitVersion_SemVer }}.zip
           asset_content_type: application/zip
-
-      - name: Copy Commit Files
-        run: |
-          Copy-Item -path "./output/CHANGELOG.md" -Destination ".\" -force
-          IF(Test-Path .\docs) {
-            Remove-Item -Recurse -Path .\docs -force
-          }
-          Copy-Item -path "output/docs" -Destination ".\" -Recurse
-          GCI ./
-        shell: pwsh
 
       - name: Commit CHANGELOG.md, module manifest & docs
         if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
