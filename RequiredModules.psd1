@@ -14,5 +14,6 @@
     ModuleBuilder               = 'latest'
     ChangelogManagement         = 'latest'
     Sampler                     = 'latest'
+    PlatyPS                     = 'latest'
 }
 
