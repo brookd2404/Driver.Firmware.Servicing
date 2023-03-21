@@ -21,9 +21,8 @@ task SetGitHubActionEnvironmentVariables {
 }
 
 task zip_module_release {
+    . Set-SamplerTaskVariable
     $zipFile = Join-Path -Path $OutputDirectory -ChildPath "$($ProjectName)_$($ModuleVersion).zip"
-
     Write-Host -Object "Zipping release to $zipFile" -ForegroundColor DarkGray
-
     Compress-Archive -Path $BuiltModuleBase -DestinationPath $zipFile -Force
 }
