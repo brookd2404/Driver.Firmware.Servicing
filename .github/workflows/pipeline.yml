@@ -13,7 +13,7 @@ on:
 permissions: write-all
 jobs:
   job-master:
-    name: master
+    name: Build And Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -43,7 +43,7 @@ jobs:
         run: |
           ./build.ps1 -Tasks Pack
 
-          $Script:ManifestFile = Copy-Item -Path "output\module\${GH_PROJECTNAME}\${{ env.GitVersion_SemVer }}\${GH_PROJECTNAME}.psd1" -Destination "source\${GH_PROJECTNAME}.psd1" -force -passThru
+          $Script:ManifestFile = Copy-Item -Path "output\module\${{ env.GH_PROJECTNAME }}\${{ env.GitVersion_SemVer }}\${{ env.GH_PROJECTNAME }}.psd1" -Destination "source\${{ env.GH_PROJECTNAME }}.psd1" -force -passThru
           $ManifestData = Import-PowerShellDataFile -Path $Script:ManifestFile
           $ManifestData.PrivateData.PSData.ReleaseNotes >> output/releasenotes.txt
         shell: pwsh
@@ -89,7 +89,7 @@ jobs:
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
           git add CHANGELOG.md
-          git add source/${GH_PROJECTNAME}.psd1
+          git add source/${{ env.GH_PROJECTNAME }}.psd1
           git add docs
           git commit -m "Released ${{ env.GitVersion_SemVer }}"
 
