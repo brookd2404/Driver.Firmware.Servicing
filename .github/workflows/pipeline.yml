@@ -43,7 +43,7 @@ jobs:
         run: |
           ./build.ps1 -Tasks Pack
 
-          $Script:ManifestFile = Copy-Item -Path "output\module\Driver.Firmware.Servicing\${{ env.GitVersion_SemVer }}\Driver.Firmware.Servicing.psd1" -Destination "source\Driver.Firmware.Servicing.psd1" -force -passThru
+          $Script:ManifestFile = Copy-Item -Path "output\module\${GH_PROJECTNAME}\${{ env.GitVersion_SemVer }}\${GH_PROJECTNAME}.psd1" -Destination "source\${GH_PROJECTNAME}.psd1" -force -passThru
           $ManifestData = Import-PowerShellDataFile -Path $Script:ManifestFile
           $ManifestData.PrivateData.PSData.ReleaseNotes >> output/releasenotes.txt
         shell: pwsh
@@ -89,10 +89,9 @@ jobs:
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
           git add CHANGELOG.md
-          git add source/Driver.Firmware.Servicing.psd1
+          git add source/${GH_PROJECTNAME}.psd1
           git add docs
           git commit -m "Released ${{ env.GitVersion_SemVer }}"
-      #          git add CHANGELOG.md source/${GH_PROJECTNAME}.psd1 docs
 
       - name: Push commit
         if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
