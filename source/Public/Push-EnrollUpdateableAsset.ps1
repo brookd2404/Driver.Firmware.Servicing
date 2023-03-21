@@ -10,6 +10,8 @@ function Push-EnrollUpdateableAsset {
         Push-EnrollUpdateableAsset -azureDeviceIDs ('ID1','ID2')
     .PARAMETER azureDeviceIDs
         The Azure AD Device IDs to enroll as updateable assets.
+    .NOTES
+        This script is to be used to push enrol assets as without it, the delay could be significant. This is also a reccoemnded step in the documentation from Microsoft.
     #>
     [CmdletBinding(SupportsShouldProcess = $true)]
     param (

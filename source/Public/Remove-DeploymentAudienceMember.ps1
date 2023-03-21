@@ -20,7 +20,6 @@ function Remove-DeploymentAudienceMember {
         [Parameter(Mandatory = $true)]
         [string]
         $policyID
-
     )
     begin {
         # Create the param body base

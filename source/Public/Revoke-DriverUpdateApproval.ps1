@@ -12,9 +12,11 @@ function Revoke-DriverUpdateApproval {
         The policy IDs to revoke the approval from.
     .PARAMETER catalogEntryID
         The update catalog entry ID.
+    .PARAMETER return
+        Return the response from the API.
     #>
     [CmdletBinding(SupportsShouldProcess = $true)]
-    [OutputType()]
+    [OutputType("System.Array", ParameterSetName = "return")]
     param (
         [Parameter(Mandatory = $true)]
         [array]
@@ -22,8 +24,10 @@ function Revoke-DriverUpdateApproval {
         # The catalog entry ID, use Get-DriverUpdatePolicyApplicableContent to get the ID.
         [Parameter(Mandatory = $true)]
         [string]
-        $catalogEntryID
-
+        $catalogEntryID,
+        [Parameter(ParameterSetName = "return", Mandatory = $false, dontShow = $true)]
+        [array]
+        $return = @()
     )
     begin {
         # Create the param body base
@@ -33,7 +37,6 @@ function Revoke-DriverUpdateApproval {
         }
     }
     process {
-        $return = New-Object -TypeName System.Collections.ArrayList
         if ($PSCmdlet.ShouldProcess("Revokes a driver update approval from a policy for Windows Updates for Business",
             "Revokes a driver update approval from a policy for Windows Updates for Business",
             "Do you want to revoke the driver update approval from a policy for Windows Updates for Business?"
@@ -67,6 +70,6 @@ function Revoke-DriverUpdateApproval {
         }
     }
     end {
-        return [System.Collections.ArrayList]$return
+        return $return
     }
 }

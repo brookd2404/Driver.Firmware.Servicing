@@ -13,9 +13,11 @@ function Add-DriverUpdateApproval {
         The catalog entry ID to add to the policy.
     .PARAMETER deferDays
         The days to defer the deployment of the driver update.
+    .PARAMETER return
+        Return the response from the API.
     #>
     [CmdletBinding()]
-    [OutputType([System.Object])]
+    [OutputType("System.Array", ParameterSetName = "return")]
     param (
         [Parameter(Mandatory = $true)]
         [array]
@@ -27,7 +29,10 @@ function Add-DriverUpdateApproval {
         # The days to defer the deployment of the driver update.
         [Parameter()]
         [int]
-        $deferDays = 0
+        $deferDays = 0,
+        [parameter(ParameterSetName = "return", Mandatory = $false, dontShow = $true)]
+        [array]
+        $return = @()
     )
     begin {
         # Create the param body base
@@ -49,7 +54,6 @@ function Add-DriverUpdateApproval {
         }
     }
     process {
-        $return = @()
         foreach ($policyID in $policyIDs) {
             $applicableConent = Get-DriverUpdatePolicyApplicableContent -policyID $policyID
             if ($applicableConent.catalogEntry.id -contains $catalogEntryID) {
@@ -73,6 +77,6 @@ function Add-DriverUpdateApproval {
         }
     }
     end {
-        return ,@($return)
+        $return
     }
 }

@@ -16,7 +16,6 @@ function Remove-DriverUpdatePolicy {
         [Parameter(Mandatory = $true)]
         [string]
         $policyID
-
     )
     process {
         if ($PSCmdlet.ShouldProcess("Deletes the Driver Update Policy with ID $policyID",

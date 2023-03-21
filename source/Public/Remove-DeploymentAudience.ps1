@@ -16,7 +16,6 @@ function Remove-DeploymentAudience {
         [Parameter(Mandatory = $true)]
         [string]
         $audienceID
-
     )
     process {
         if ($PSCmdlet.ShouldProcess("Deletes the Update Audience with ID $audienceID",
