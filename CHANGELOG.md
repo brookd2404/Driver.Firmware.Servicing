@@ -5,6 +5,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Fixed
+- Renamed Push-EnrollUpdateableAsset to Push-EnrollUpdatableAsset to resolve a spelling error
+
+## Added
+- Updated Automation
+
 ## [1.0.8] - 2023-03-21
 
 ## Added

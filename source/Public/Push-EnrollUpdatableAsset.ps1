@@ -1,4 +1,4 @@
-function Push-EnrollUpdateableAsset {
+function Push-EnrollUpdatableAsset {
     <#
     .SYNOPSIS
         This script is to be used to push enrol assets as without it, the delay could be significant.
@@ -7,11 +7,11 @@ function Push-EnrollUpdateableAsset {
     .NOTES
         This has only been tested for the commercial driver and firmware updates.
     .EXAMPLE
-        Push-EnrollUpdateableAsset -azureDeviceIDs ('ID1','ID2')
+        Push-EnrollUpdatableAsset -azureDeviceIDs ('ID1','ID2')
     .PARAMETER azureDeviceIDs
-        The Azure AD Device IDs to enroll as updateable assets.
+        The Azure AD Device IDs to enrol as updatable assets.
     .NOTES
-        This script is to be used to push enrol assets as without it, the delay could be significant. This is also a reccoemnded step in the documentation from Microsoft.
+        This script is to be used to push enrol assets as without it, the delay could be significant. This is also a recommended step in the documentation from Microsoft.
     #>
     [CmdletBinding(SupportsShouldProcess = $true)]
     param (

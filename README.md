@@ -53,7 +53,7 @@ Get-DriverUpdatePolicyComplianceChange
 Get-UpdatableAsset
 New-DeploymentAudience
 New-DriverUpdatePolicy
-Push-EnrollUpdateableAsset
+Push-EnrollUpdatableAsset
 Remove-DeploymentAudience
 Remove-DeploymentAudienceMember
 Remove-DriverUpdatePolicy
@@ -78,7 +78,7 @@ $policy = New-DriverUpdatePolicy -audienceID $deploymentAudience.id -policyType 
 #Array of Azure AD Device IDs
 $deviceIDs = @("deviceID1","deviceID2")
 #Explicitly Enrol the devices to the WUfBDS Driver Feature
-Push-EnrollUpdateableAsset -deviceIDs $deviceIDs
+Push-EnrollUpdatableAsset -deviceIDs $deviceIDs
 #Add the devices to the deployment audience
 Add-DeploymentAudienceMember -audienceID $deploymentAudience.id -azureDeviceIDs $deviceIDs
 ```
