@@ -2,7 +2,7 @@
 Module Name: Driver.Firmware.Servicing
 Module Guid: 2dce5334-b867-4cbb-8a2c-c56576934385
 Download Help Link: {{ Update Download Link }}
-Help Version: 1.0.17
+Help Version: 1.0.19
 Locale: en-US
 ---
 
