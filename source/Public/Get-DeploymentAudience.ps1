@@ -21,9 +21,11 @@ function Get-DeploymentAudience {
     process {
         try {
             IF ([string]::IsNullOrEmpty($audienceID)) {
+                Write-Verbose "Getting all deployment audiences because no audienceID was specified."
                 $DriverUpdateDeploymentAudience = Invoke-GetRequest -Uri "https://graph.microsoft.com/beta/admin/windows/updates/deploymentAudiences" -All
             }
             elseif (-Not([string]::IsNullOrEmpty($audienceID))) {
+                Write-Verbose "Getting the deployment audience for the audienceID '$audienceID'."
                 $DriverUpdateDeploymentAudience = Invoke-GetRequest -Uri "https://graph.microsoft.com/beta/admin/windows/updates/deploymentAudiences?`$filter=id eq '$audienceID'"
             }
         }
@@ -32,6 +34,7 @@ function Get-DeploymentAudience {
         }
     }
     end {
+        Write-Verbose "Returning the deployment audience(s)."
         return $DriverUpdateDeploymentAudience
     }
 }

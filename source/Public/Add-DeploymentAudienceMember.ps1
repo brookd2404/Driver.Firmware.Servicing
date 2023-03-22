@@ -33,18 +33,27 @@ function Add-DeploymentAudienceMember {
             throw "You must specify either the audienceID or policyID parameter."
         }
         # Create the param body base
+        Write-Verbose "Creating the param body base."
         $paramBody = @{
             addMembers = @(
             )
         }
     }
     process {
+        Write-Verbose "Checking the input parameters."
         IF (-Not([String]::IsNullOrEmpty($audienceID))) {
+            Write-Verbose "Getting the members of the audience using audienceID."
             $updateAudienceMembers = Get-DeploymentAudienceMember -audienceID $audienceID
+            Write-Verbose "Audience member count: $($updateAudienceMembers.Count)"
         }
-        elseif (([String]::IsNullOrEmpty($policyID))) {
+        elseif (-not([String]::IsNullOrEmpty($policyID))) {
+            Write-Verbose "Getting the members of the audience using policyID."
+            $audienceID = (Get-DriverUpdatePolicy -policyID $policyID).audience.id
+            Write-Verbose "Audience ID: $audienceID"
             $updateAudienceMembers = Get-DeploymentAudienceMember -policyID $policyID
+            Write-Verbose "Audience member count: $($updateAudienceMembers.Count)"
         }
+        Write-Verbose "Checking if the devices are already members of the audience."
         foreach ($id in $azureDeviceIDs) {
             IF (-Not($updateAudienceMembers.id -contains $id)) {
                 $memberObject = @{
@@ -56,7 +65,9 @@ function Add-DeploymentAudienceMember {
         }
     }
     end {
+        Write-Verbose "Checking if there are any members to add."
         IF ($paramBody.addMembers.Count -ge 1) {
+            Write-Verbose "Adding $($paramBody.addMembers.Count) members to the audience: $audienceID."
             Invoke-MgGraphRequest `
                 -Method POST `
                 -Uri "https://graph.microsoft.com/beta/admin/windows/updates/deploymentAudiences('$audienceID')/updateAudience" `

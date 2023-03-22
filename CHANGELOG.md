@@ -4,13 +4,24 @@ The format is based on and uses the types of changes according to [Keep a Change
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## Fixed
+- Fixed an issue with the Add-DeploymentAudienceMember function where it was not processing the input correctly.
 
+## Added
+- Added Verbose output to the Add-DeploymentAudienceMember function
+- Added Verbose output to the Add-DriverUpdateApproval function
+- Added Verbose output to the Get-DeploymentAudience function
+- Added Verbose output to the Get-DeploymentAudienceMember function
+
+## [1.0.15] - 2023-03-22
 ## Added
 - Functionality to Add-DeploymentAudienceMember to allow for using either the policyID or AudienceID
 - Functionality to Get-DeploymentAudienceMember to allow for using either the policyID or AudienceID
 
 ## Fixed
 - Renamed Push-EnrollUpdateableAsset to Push-EnrollUpdatableAsset to resolve a spelling error
+
+## [1.0.11] - 2023-03-22
 
 ## Added
 - Updated Automation

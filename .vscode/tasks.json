@@ -128,6 +128,55 @@
                 "kind": "test",
                 "isDefault": true
             }
+        },
+        {
+            "label": "pack",
+            "type": "shell",
+            "command": "&${cwd}/build.ps1",
+            "args": [
+                "-AutoRestore",
+                "-Tasks",
+                "pack"
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [
+                {
+                    "owner": "powershell",
+                    "fileLocation": [
+                        "absolute"
+                    ],
+                    "severity": "error",
+                    "pattern": [
+                        {
+                            "regexp": "^\\s*(\\[-\\]\\s*.*?)(\\d+)ms\\s*$",
+                            "message": 1
+                        },
+                        {
+                            "regexp": "(.*)",
+                            "code": 1
+                        },
+                        {
+                            "regexp": ""
+                        },
+                        {
+                            "regexp": "^.*,\\s*(.*):\\s*line\\s*(\\d+).*",
+                            "file": 1,
+                            "line": 2
+                        }
+                    ]
+                }
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
         }
     ]
 }

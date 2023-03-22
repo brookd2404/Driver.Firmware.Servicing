@@ -25,16 +25,20 @@ function Get-DeploymentAudienceMember {
         $audienceID
     )
     begin {
+        Write-Verbose "Checking to make sure either the audienceID or policyID parameter was specified."
         if ([String]::IsNullOrEmpty($audienceID) -and ([String]::IsNullOrEmpty($policyID))) {
             throw "You must specify either the audienceID or policyID parameter."
         }
     }
     process {
         try {
+            Write-Verbose "Getting the members of the deployment audience."
             if(-Not([String]::IsNullOrEmpty($audienceID))) {
+                Write-Verbose "Using the audienceID parameter to get the members of the deployment audience."
                 $members = Invoke-GetRequest -Uri "https://graph.microsoft.com/beta/admin/windows/updates/deploymentAudiences('$($audienceID)')/members" -All
             }
             ELSEIF (-Not([String]::IsNullOrEmpty($policyID))) {
+                Write-Verbose "Using the policyID parameter to get the members of the deployment audience."
                 $policy = Get-DriverUpdatePolicy -policyID $policyID
                 $members = Invoke-GetRequest -Uri "https://graph.microsoft.com/beta/admin/windows/updates/deploymentAudiences('$($policy.audience.id)')/members" -All
             }
@@ -44,6 +48,7 @@ function Get-DeploymentAudienceMember {
         }
     }
     end {
+        Write-Verbose "Returning the members of the deployment audience."
         return $members
     }
 }

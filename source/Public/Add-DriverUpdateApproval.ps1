@@ -35,6 +35,7 @@ function Add-DriverUpdateApproval {
         $return = @()
     )
     begin {
+        Write-Verbose "Creating the param body for the request."
         # Create the param body base
         $paramBody = @{
             "@odata.type" = "#microsoft.graph.windowsUpdates.contentApproval"
@@ -54,11 +55,16 @@ function Add-DriverUpdateApproval {
         }
     }
     process {
+        Write-Verbose "Processing Count: $(policyIDs.count)"
         foreach ($policyID in $policyIDs) {
+            Write-Verbose "Getting the applicable content for the policy ID: $policyID"
             $applicableConent = Get-DriverUpdatePolicyApplicableContent -policyID $policyID
             if ($applicableConent.catalogEntry.id -contains $catalogEntryID) {
+                Write-Verbose "The catalog entry ID is applicable to the policy ID: $policyID"
+                Write-Verbose "Adding the catalog entry ID with the defer days of $deferDays to the policy ID: $policyID"
                 $startDate = (Get-Date).AddDays($deferDays).ToString("yyyy-MM-ddT00:00:00Z")
                 try {
+                    Write-Verbose "Adding the catalog entry ID to the policy ID: $policyID"
                     $paramBody.deploymentSettings.schedule.startDateTime = $startDate
                     $responce = Invoke-MgGraphRequest `
                         -Method POST `
@@ -77,6 +83,7 @@ function Add-DriverUpdateApproval {
         }
     }
     end {
+        Write-Verbose "Returning the responce from the API."
         $return
     }
 }

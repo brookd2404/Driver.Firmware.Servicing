@@ -53,8 +53,8 @@ BuildWorkflow:
 
   pack:
     - build
+    - copy_module_items
     - zip_module_release
-    - Copy-ModuleItems
 
   # Defining test task to be run when invoking `./build.ps1 -Tasks test`
   test:

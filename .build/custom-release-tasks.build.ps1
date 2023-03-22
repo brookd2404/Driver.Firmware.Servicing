@@ -4,16 +4,16 @@ task generate_gitrelease_notes{
     $ManifestData.PrivateData.PSData.ReleaseNotes >> "$OutputDirectory/releasenotes.txt"
 }
 
-task Copy-ModuleItems {
+task copy_module_items {
     . Set-SamplerTaskVariable
-    Copy-Item -path "$OutputDirectory\CHANGELOG.md" -Destination $SourcePath -force
-    IF(Test-Path "$SourcePath\docs") {
-        Remove-Item -Recurse -Path "$SourcePath\docs" -force
+    Copy-Item -path "$OutputDirectory/CHANGELOG.md" -Destination $env:GITHUB_WORKSPACE -force
+    IF(Test-Path "$env:GITHUB_WORKSPACE/docs") {
+        Remove-Item -Recurse -Path "$env:GITHUB_WORKSPACE/docs" -force
     }
     #Copy Docs
-    Copy-Item -path "$OutputDirectory\docs" -Destination $SourcePath -Recurse
+    Copy-Item -path "$OutputDirectory/docs" -Destination $env:GITHUB_WORKSPACE -Recurse
     #Update Build Manifest
-    Copy-Item -Path $BuiltModuleManifest -Destination $SourcePath -force -passThru
+    Copy-Item -Path $BuiltModuleManifest -Destination $env:GITHUB_WORKSPACE -force
 }
 
 task SetGitHubActionEnvironmentVariables {
