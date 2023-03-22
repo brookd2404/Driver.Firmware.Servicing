@@ -20,7 +20,9 @@ function Push-EnrollUpdatableAsset {
         $azureDeviceIDs
     )
     begin {
+        Write-Verbose "Starting function $($MyInvocation.MyCommand.Name)"
         # Create the param body base
+        Write-Verbose "Creating the param body base"
         $paramBody = @{
             updateCategory = "driver"
             assets         = @(
@@ -29,25 +31,19 @@ function Push-EnrollUpdatableAsset {
     }
     process {
         if($PSCmdlet.ShouldProcess("Enroll Assets", "Enroll Assets")) {
-            $updateAudienceMembers = Get-DeploymentAudienceMember -policyID $updateAudienceID
+            Write-Verbose "Getting updatable assets"
+            $updatableAssets = Get-UpdatableAsset
+            Write-Verbose "Checking if the assets are already enrolled"
             foreach ($id in $azureDeviceIDs) {
-                IF (-Not($updateAudienceMembers.id -contains $id)) {
+                IF (-Not($updatableAssets | Where-Object { $_.id -match $id }).enrollments.updateCategory -notcontains "driver") {
+                    Write-Verbose "Adding $id to the param body, as it is not already enrolled"
                     $memberObject = @{
                         "@odata.type" = "#microsoft.graph.windowsUpdates.azureADDevice"
                         id            = $id
                     }
-                    $paramBody.addMembers += $memberObject
+                    $paramBody.assets += $memberObject
                 }
-            }
-        }
-        $updatableAssets = Get-UpdatableAsset
-        foreach ($id in $azureDeviceIDs) {
-            IF (-Not($updatableAssets | Where-Object { $_.id -match $id }).enrollments.updateCategory -notcontains "driver") {
-                $memberObject = @{
-                    "@odata.type" = "#microsoft.graph.windowsUpdates.azureADDevice"
-                    id            = $id
-                }
-                $paramBody.assets += $memberObject
+                Write-Verbose "Param Body has $($paramBody.assets.Count) assets"
             }
         }
     }
@@ -58,5 +54,6 @@ function Push-EnrollUpdatableAsset {
                 -Uri "https://graph.microsoft.com/beta/admin/windows/updates/updatableAssets/enrollAssets" `
                 -Body $paramBody
         }
+        Write-Verbose "Finished function $($MyInvocation.MyCommand.Name)"
     }
 }
