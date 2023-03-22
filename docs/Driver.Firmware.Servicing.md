@@ -2,7 +2,7 @@
 Module Name: Driver.Firmware.Servicing
 Module Guid: 2dce5334-b867-4cbb-8a2c-c56576934385
 Download Help Link: {{ Update Download Link }}
-Help Version: 1.0.8
+Help Version: 1.0.17
 Locale: en-US
 ---
 
@@ -41,7 +41,7 @@ Locale: en-US
 ### [New-DriverUpdatePolicy](New-DriverUpdatePolicy.md)
 {{ Fill in the Description }}
 
-### [Push-EnrollUpdateableAsset](Push-EnrollUpdateableAsset.md)
+### [Push-EnrollUpdatableAsset](Push-EnrollUpdatableAsset.md)
 {{ Fill in the Description }}
 
 ### [Remove-DeploymentAudience](Remove-DeploymentAudience.md)

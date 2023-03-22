@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Push-EnrollUpdateableAsset
+# Push-EnrollUpdatableAsset
 
 ## SYNOPSIS
 This script is to be used to push enrol assets as without it, the delay could be significant.
@@ -13,7 +13,7 @@ This script is to be used to push enrol assets as without it, the delay could be
 ## SYNTAX
 
 ```
-Push-EnrollUpdateableAsset [-azureDeviceIDs] <Array> [-WhatIf] [-Confirm] [<CommonParameters>]
+Push-EnrollUpdatableAsset [-azureDeviceIDs] <Array> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,13 +23,13 @@ This script is to be used to push enrol assets as without it, the delay could be
 
 ### EXAMPLE 1
 ```
-Push-EnrollUpdateableAsset -azureDeviceIDs ('ID1','ID2')
+Push-EnrollUpdatableAsset -azureDeviceIDs ('ID1','ID2')
 ```
 
 ## PARAMETERS
 
 ### -azureDeviceIDs
-The Azure AD Device IDs to enroll as updateable assets.
+The Azure AD Device IDs to enrol as updatable assets.
 
 ```yaml
 Type: Array
@@ -83,6 +83,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 This script is to be used to push enrol assets as without it, the delay could be significant.
-This is also a reccoemnded step in the documentation from Microsoft.
+This is also a recommended step in the documentation from Microsoft.
 
 ## RELATED LINKS

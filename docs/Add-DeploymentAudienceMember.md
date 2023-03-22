@@ -13,7 +13,8 @@ Add members to a deployment audience for Windows Updates for Business
 ## SYNTAX
 
 ```
-Add-DeploymentAudienceMember [-azureDeviceIDs] <Array> [-updateAudienceID] <String> [<CommonParameters>]
+Add-DeploymentAudienceMember [-azureDeviceIDs] <Array> [[-audienceID] <String>] [[-policyID] <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,6 +28,21 @@ This function will check if the deployments audiences have the devices as member
 ```
 
 ## PARAMETERS
+
+### -audienceID
+The Update Audience ID to add the members to.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -azureDeviceIDs
 The Azure Device IDs to add to the audience.
@@ -43,16 +59,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -updateAudienceID
-The Update Audience ID to add the members to.
+### -policyID
+The Update Policy ID to add the members to.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 2
+Required: False
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -66,5 +82,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+You can specify either the audienceID or policyID parameter, if both are specified the audienceID will be used.
 
 ## RELATED LINKS

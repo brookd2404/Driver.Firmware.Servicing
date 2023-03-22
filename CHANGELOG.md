@@ -4,6 +4,8 @@ The format is based on and uses the types of changes according to [Keep a Change
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.0.17] - 2023-03-22
 ## Fixed
 - Fixed an issue with the Add-DeploymentAudienceMember function where it was not processing the input correctly.
 

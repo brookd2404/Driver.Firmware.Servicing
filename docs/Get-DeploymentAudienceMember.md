@@ -13,7 +13,7 @@ This function will get the members of a deployment audience for Windows Updates 
 ## SYNTAX
 
 ```
-Get-DeploymentAudienceMember [-policyID] <String> [<CommonParameters>]
+Get-DeploymentAudienceMember [[-policyID] <String>] [[-audienceID] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -28,6 +28,21 @@ This function will get the members of a deployment audience for Windows Updates 
 
 ## PARAMETERS
 
+### -audienceID
+The audience ID to get the members for.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -policyID
 The policy ID to get the members for.
 
@@ -36,7 +51,7 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 1
 Default value: None
 Accept pipeline input: False
@@ -51,6 +66,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-This has only been tested for the commercial driver and firmware updates.
+You can specify either the audienceID or policyID parameter, if both are specified the audienceID will be used.
 
 ## RELATED LINKS
