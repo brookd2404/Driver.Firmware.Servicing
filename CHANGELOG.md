@@ -5,6 +5,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Added
+- Functionality to Add-DeploymentAudienceMember to allow for using either the policyID or AudienceID
+- Functionality to Get-DeploymentAudienceMember to allow for using either the policyID or AudienceID
+
 ## Fixed
 - Renamed Push-EnrollUpdateableAsset to Push-EnrollUpdatableAsset to resolve a spelling error
 
