@@ -12,7 +12,7 @@
 RootModule = 'Driver.Firmware.Servicing.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.11'
+ModuleVersion = '1.0.15'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -108,7 +108,11 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-          ReleaseNotes = '## [1.0.11] - 2023-03-21
+          ReleaseNotes = '## [1.0.15] - 2023-03-22
+
+## Added
+- Functionality to Add-DeploymentAudienceMember to allow for using either the policyID or AudienceID
+- Functionality to Get-DeploymentAudienceMember to allow for using either the policyID or AudienceID
 
 ## Fixed
 - Renamed Push-EnrollUpdateableAsset to Push-EnrollUpdatableAsset to resolve a spelling error
