@@ -49,7 +49,7 @@ BuildWorkflow:
     - Build_Module_ModuleBuilder
     - Create_changelog_release_output
     - Generate_MAML_from_built_module
-    - Copy-GitReleaseNotes
+    - generate_gitrelease_notes
 
   pack:
     - build
@@ -58,6 +58,8 @@ BuildWorkflow:
 
   # Defining test task to be run when invoking `./build.ps1 -Tasks test`
   test:
+    - Clean
+    - Build_Module_ModuleBuilder
     # Uncomment to modify the PSModulePath in the test pipeline (also requires the build configuration section SetPSModulePath).
     #- Set_PSModulePath
     - Pester_Tests_Stop_On_Fail

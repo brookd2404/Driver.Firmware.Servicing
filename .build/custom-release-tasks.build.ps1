@@ -1,4 +1,4 @@
-task Copy-GitReleaseNotes {
+task generate_gitrelease_notes{
     . Set-SamplerTaskVariable
     $ManifestData = Import-PowerShellDataFile -Path $BuiltModuleManifest
     $ManifestData.PrivateData.PSData.ReleaseNotes >> "$OutputDirectory/releasenotes.txt"
