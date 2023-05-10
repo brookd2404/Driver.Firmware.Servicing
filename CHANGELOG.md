@@ -5,6 +5,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Fixed an issue with Add-DriverUpdateApproval where it was erroring on a count operation. 
+
 ## [1.0.19] - 2023-03-22
 
 ### Fixed 

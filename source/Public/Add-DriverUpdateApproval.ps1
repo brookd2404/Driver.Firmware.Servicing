@@ -55,7 +55,7 @@ function Add-DriverUpdateApproval {
         }
     }
     process {
-        Write-Verbose "Processing Count: $(policyIDs.count)"
+        Write-Verbose "Processing Count: $($policyIDs.count)"
         foreach ($policyID in $policyIDs) {
             Write-Verbose "Getting the applicable content for the policy ID: $policyID"
             $applicableConent = Get-DriverUpdatePolicyApplicableContent -policyID $policyID
