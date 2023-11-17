@@ -8,7 +8,7 @@ function Get-UpdatableAsset {
         This has only been tested for the commercial driver and firmware updates.
     .EXAMPLE
         Get-UpdatableAsset
-        Get-UpdatableAsset -AzureADDeviceID <AzureADDeviceID>
+        Get-UpdatableAsset -EntraIDDeviceID <AzureADDeviceID>
     .PARAMETER AzureADDeviceID
         The Azure AD Device ID to get the updatable asset for.
     #>
@@ -16,15 +16,15 @@ function Get-UpdatableAsset {
     param (
         [Parameter(Mandatory = $false)]
         [string]
-        $AzureADDeviceID
+        $EntraIDDeviceID
     )
     process {
         try {
-            IF ([string]::IsNullOrEmpty($AzureADDeviceID)) {
+            IF ([string]::IsNullOrEmpty($EntraIDDeviceID)) {
                 $updatableAsset = Invoke-GetRequest -Uri "https://graph.microsoft.com/beta/admin/windows/updates/updatableAssets" -All
             }
-            elseif (-Not([string]::IsNullOrEmpty($AzureADDeviceID))) {
-                $updatableAsset = Invoke-GetRequest -Uri "https://graph.microsoft.com/beta/admin/windows/updates/updatableAssets?`$filter=id eq '$AzureADDeviceID'"
+            elseif (-Not([string]::IsNullOrEmpty($EntraIDDeviceID))) {
+                $updatableAsset = Invoke-GetRequest -Uri "https://graph.microsoft.com/beta/admin/windows/updates/updatableAssets/$EntraIDDeviceID"
             }
         }
         catch {

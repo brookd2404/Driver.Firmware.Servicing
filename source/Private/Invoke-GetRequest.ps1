@@ -49,7 +49,15 @@ function Invoke-GetRequest {
                     Method = "GET"
                     URI    = $Uri
                 }
-                $return = (Invoke-MgGraphRequest @getRequestParameters -ErrorAction Stop).value
+                $Call = Invoke-MgGraphRequest @getRequestParameters -ErrorAction Stop
+                IF (-Not($Call.Value))
+                {
+                    $return = $Call
+                }
+                else
+                {
+                    $return = $Call.Value
+                }
             }
         }
     }

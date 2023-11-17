@@ -13,7 +13,7 @@ This function get all updateable assets for Windows Updates for Business.
 ## SYNTAX
 
 ```
-Get-UpdatableAsset [[-AzureADDeviceID] <String>] [<CommonParameters>]
+Get-UpdatableAsset [[-EntraIDDeviceID] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,12 +24,12 @@ This function get all updateable assets for Windows Updates for Business.
 ### EXAMPLE 1
 ```
 Get-UpdatableAsset
-Get-UpdatableAsset -AzureADDeviceID <AzureADDeviceID>
+Get-UpdatableAsset -EntraIDDeviceID <AzureADDeviceID>
 ```
 
 ## PARAMETERS
 
-### -AzureADDeviceID
+### -EntraIDDeviceID
 The Azure AD Device ID to get the updatable asset for.
 
 ```yaml
