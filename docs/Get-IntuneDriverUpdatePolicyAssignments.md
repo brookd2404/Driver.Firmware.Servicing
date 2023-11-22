@@ -5,39 +5,38 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-UpdatableAsset
+# Get-IntuneDriverUpdatePolicyAssignments
 
 ## SYNOPSIS
-This function get all updateable assets for Windows Updates for Business.
+This function gets the assignments for a Driver Policy within Intune
 
 ## SYNTAX
 
 ```
-Get-UpdatableAsset [[-EntraIDDeviceID] <String>] [<CommonParameters>]
+Get-IntuneDriverUpdatePolicyAssignments [-policyID] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This function get all updateable assets for Windows Updates for Business.
+This function gets the assignments for a Driver Policy within Intune
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-UpdatableAsset
-Get-UpdatableAsset -EntraIDDeviceID <AzureADDeviceID>
+
 ```
 
 ## PARAMETERS
 
-### -EntraIDDeviceID
-{{ Fill EntraIDDeviceID Description }}
+### -policyID
+The policy ID to get the assignments for.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 1
 Default value: None
 Accept pipeline input: False
@@ -53,5 +52,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 This has only been tested for the commercial driver and firmware updates.
+https://learn.microsoft.com/en-us/graph/api/adminwindowsupdates-list-updatepolicies?view=graph-rest-beta&tabs=http
+
+You can get the group ID by using (Get-IntuneDriverUpdatePolicyAssignments -policyID \<PolicyID\>).id.split('_') | Where-Object {$_ -ne "\<PolicyID"}
 
 ## RELATED LINKS

@@ -2,7 +2,7 @@
 Module Name: Driver.Firmware.Servicing
 Module Guid: 2dce5334-b867-4cbb-8a2c-c56576934385
 Download Help Link: {{ Update Download Link }}
-Help Version: 1.0.21
+Help Version: 1.0.23
 Locale: en-US
 ---
 
@@ -32,6 +32,12 @@ Locale: en-US
 ### [Get-DriverUpdatePolicyComplianceChange](Get-DriverUpdatePolicyComplianceChange.md)
 {{ Fill in the Description }}
 
+### [Get-IntuneDriverUpdatePolicy](Get-IntuneDriverUpdatePolicy.md)
+{{ Fill in the Description }}
+
+### [Get-IntuneDriverUpdatePolicyAssignments](Get-IntuneDriverUpdatePolicyAssignments.md)
+{{ Fill in the Description }}
+
 ### [Get-UpdatableAsset](Get-UpdatableAsset.md)
 {{ Fill in the Description }}
 
@@ -39,6 +45,12 @@ Locale: en-US
 {{ Fill in the Description }}
 
 ### [New-DriverUpdatePolicy](New-DriverUpdatePolicy.md)
+{{ Fill in the Description }}
+
+### [New-IntuneDriverUpdatePolicy](New-IntuneDriverUpdatePolicy.md)
+{{ Fill in the Description }}
+
+### [New-IntuneDriverUpdatePolicyAssignment](New-IntuneDriverUpdatePolicyAssignment.md)
 {{ Fill in the Description }}
 
 ### [Push-EnrollUpdatableAsset](Push-EnrollUpdatableAsset.md)
